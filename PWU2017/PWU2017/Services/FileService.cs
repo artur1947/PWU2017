@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PWU2017.Services
 {
-    class FileService
+    public class FileService
     {
         public async Task SaveAsync(Models.FileInfo model)
         {

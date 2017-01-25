@@ -5,8 +5,13 @@
     xmlns:local="using:PWU2017"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:PWU2017.ViewModels"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -16,20 +21,26 @@
 
         <CommandBar Background="RoyalBlue" RequestedTheme="Dark">
             <CommandBar.Content>
-                <TextBlock Margin="12,8" FontSize="24" Text ="Notatnik" />
-            </CommandBar.Content>
-            <!--Button 3 kropki-->
-            <AppBarToggleButton x:Name="toggleButton" Icon="ClosePane" Label="Details" IsChecked="{Binding IsPaneOpen, ElementName=splitView, Mode=TwoWay}" />
-            
+                <TextBlock Margin="12,8" FontSize="24" Text ="PWU2017 - Notatnik"/>
+                </CommandBar.Content> 
+            <!-- SAVE BUTTON -->
+            <AppBarButton x:Name="SaveButton1" Click="{x:Bind ViewModel.Save}"
+                          Icon="Save" Label="Save" />
+            <!-- OPEN BUTTON -->
+            <AppBarButton x:Name="OpenButton1" Click="{x:Bind ViewModel.Open}"
+                          Icon="OpenFile" Label="Open" />
+            <!-- DETAILS TOGGLE -->
+            <AppBarToggleButton x:Name="ToggleButton" Icon="ClosePane"
+                                IsChecked="{Binding IsPaneOpen, ElementName=SplitView, Mode = TwoWay}"
+                                Label="Details"/>
         </CommandBar>
-        <!--Button chowający lewy panel boczny-->
-        <SplitView x:Name="splitView" Grid.Row="1">
-         
+        
+        <SplitView x:Name="SplitView" Grid.Row="1">
             <SplitView.Pane>
                 <Rectangle Fill="CornflowerBlue"/>
             </SplitView.Pane>
             <SplitView.Content>
-                <TextBox x:Name="textBox" TextWrapping="Wrap"/>
+                <TextBox x:Name="TextBox" TextWrapping="Wrap" Text="{Binding File.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </SplitView.Content>
         </SplitView>
 
