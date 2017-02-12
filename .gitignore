@@ -240,8 +240,3 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-
-Rest-Sealious/log.txt
-Rest-Sealious/node_modules
-npm-debug.log
-mongo/*
