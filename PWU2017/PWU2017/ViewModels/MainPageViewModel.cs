@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
@@ -10,6 +11,11 @@ namespace PWU2017.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        public MainPageViewModel()
+        {
+            App.FileReceived += async (s, e) => File = await _fileService.LoadAsync(e);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Models.FileInfo _file;

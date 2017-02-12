@@ -49,6 +49,17 @@ namespace PWU2017
             Window.Current.Activate();
         }
 
+        protected override void OnFileActivated(FileActivatedEventArgs args)
+        {
+            if (!args.Files.Any())
+                return;
+            if (args.PreviousExecutionState == ApplicationExecutionState.Running)
+                FileReceived?.Invoke(this, args.Files.First() as Windows.Storage.StorageFile);
+            else
+                RootFrame.Navigate(typeof(MainPage), args.Files.First());
+            Window.Current.Activate();
+        }
+
         public static event EventHandler<Windows.Storage.StorageFile> FileReceived;
     }
 }
