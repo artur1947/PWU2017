@@ -14,6 +14,41 @@
     
     <Grid>
 
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="NarrowVIsualState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- PRIMARY BUTTONS -->
+                        <Setter Target="ToggleButton1.Visibility" Value="Collapsed"/>
+                        <Setter Target ="OpenButton1.Visibility" Value="Collapsed"/>
+                        <Setter Target ="SaveButton1.Visibility" Value="Collapsed"/>
+                        <!-- SECONDARY BUTTONS -->
+                        <Setter Target ="ToggleButton2.Visibility" Value="Visible"/>
+                        <Setter Target ="OpenButton2.Visibility" Value="Visible"/>
+                        <Setter Target ="SaveButton2.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WideVisualState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!-- PRIMARY BUTTONS -->
+                        <Setter Target="ToggleButton1.Visibility" Value="Visible"/>
+                        <Setter Target ="OpenButton1.Visibility" Value="Visible"/>
+                        <Setter Target ="SaveButton1.Visibility" Value="Visible"/>
+                        <!-- SECONDARY BUTTONS -->
+                        <Setter Target ="ToggleButton2.Visibility" Value="Collapsed"/>
+                        <Setter Target ="OpenButton2.Visibility" Value="Collapsed"/>
+                        <Setter Target ="SaveButton2.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
@@ -21,8 +56,8 @@
 
         <CommandBar Background="RoyalBlue" RequestedTheme="Dark">
             <CommandBar.Content>
-                <TextBlock Margin="12,8" FontSize="24" Text ="PWU2017 - Notatnik"/>
-                </CommandBar.Content> 
+                <TextBlock Margin="12,8" FontSize="24" Text="{Binding File.Name}"/>
+            </CommandBar.Content> 
             <!-- SAVE BUTTON -->
             <AppBarButton x:Name="SaveButton1" Click="{x:Bind ViewModel.Save}"
                           Icon="Save" Label="Save" />
@@ -30,9 +65,18 @@
             <AppBarButton x:Name="OpenButton1" Click="{x:Bind ViewModel.Open}"
                           Icon="OpenFile" Label="Open" />
             <!-- DETAILS TOGGLE -->
-            <AppBarToggleButton x:Name="ToggleButton" Icon="ClosePane"
-                                IsChecked="{Binding IsPaneOpen, ElementName=SplitView, Mode = TwoWay}"
+            <AppBarToggleButton x:Name="ToggleButton1" Icon="ClosePane"
+                                IsChecked="{Binding IsPaneOpen, ElementName=SplitView, Mode=TwoWay}"
                                 Label="Details"/>
+            <CommandBar.SecondaryCommands>
+                <!-- SAVE BUTTON -->
+                <AppBarButton x:Name="SaveButton2" Click="{x:Bind ViewModel.Save}" Label="Save"/>
+                <!-- OPEN BUTTON -->
+                <AppBarButton x:Name="OpenButton2" Click="{x:Bind ViewModel.Open}" Label ="Open"/>
+                <!-- DETAILS TOGLE -->
+                <AppBarToggleButton x:Name="ToggleButton2"
+                                    IsChecked="{Binding IsPaneOpen, ElementName=SplitView, Mode=TwoWay}" Label="Details"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
         
         <SplitView x:Name="SplitView" Grid.Row="1">
