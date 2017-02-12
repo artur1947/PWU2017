@@ -33,7 +33,7 @@
                 </VisualState>
                 <VisualState x:Name="WideVisualState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="400"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <!-- PRIMARY BUTTONS -->
