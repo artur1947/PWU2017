@@ -12,23 +12,23 @@ namespace PWU2017.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Models.FileInfo _File;
+        private Models.FileInfo _file;
 
         public Models.FileInfo File
         {
-            get { return _File; }
+            get { return _file; }
             set
             {
-                _File = value;
+                _file = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(File)));
             }
         }
 
-        Services.FileService _FileService = new Services.FileService();
+        private readonly Services.FileService _fileService = new Services.FileService();
 
         public async void Save()
         {
-            await _FileService.SaveAsync(File);
+            await _fileService.SaveAsync(File);
         }
 
         public async void Open()
@@ -44,7 +44,7 @@ namespace PWU2017.ViewModels
             if (file == null)
                 await new Windows.UI.Popups.MessageDialog("No file selected.").ShowAsync();
             else
-                File = await _FileService.LoadAsync(file);
+                File = await _fileService.LoadAsync(file);
         }
     }
 }
