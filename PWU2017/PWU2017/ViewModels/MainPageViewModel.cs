@@ -31,10 +31,19 @@ namespace PWU2017.ViewModels
         }
 
         private readonly Services.FileService _fileService = new Services.FileService();
+        private readonly Services.ToastService _toastService = new Services.ToastService();
 
         public async void Save()
         {
-            await _fileService.SaveAsync(File);
+            try
+            {
+                await _fileService.SaveAsync(File);
+                _toastService.ShowToast(File, "File successfully saved.");
+            }
+            catch (Exception ex)
+            {
+                _toastService.ShowToast(File, $"Save failed {ex.Message}");
+            }
         }
 
         public async void Open()
