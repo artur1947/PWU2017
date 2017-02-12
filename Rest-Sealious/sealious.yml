@@ -1,6 +1,0 @@
-core:
-  datastore: mongo
-www-server:
-  port: 1337
-datastore_mongo:
-  db_name: biblioteka
